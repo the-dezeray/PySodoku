@@ -1,8 +1,8 @@
 from typing import Tuple
 import pywinstyles
-from left_frame import LeftFrame
+from .left_frame import LeftFrame
 import customtkinter as ctk
-from basic_sodoku_grid import SudokuGrid
+from .blank_sudoku_frame import SudokuGrid
 class APP(ctk.CTk):
     def __init__(self):
         super().__init__()

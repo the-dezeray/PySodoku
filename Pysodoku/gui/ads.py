@@ -2,6 +2,7 @@ from typing import Tuple
 import customtkinter as ctk
 import threading
 import keyboard
+from core.sodoku import generate,solved_sodoku
 class APP(ctk.CTk):
     def __init__(self):
         super().__init__()
@@ -112,7 +113,7 @@ class SudokuGrid(ctk.CTkFrame):
         t.start()
         self.thread.append(t)
     def create_grid(self):
-        from sodoku import generate,solved_sodoku
+
         arr =generate()
         self.solved_array = solved_sodoku(arr)
         for row in range(9):

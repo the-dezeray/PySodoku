@@ -1,5 +1,5 @@
 import customtkinter as ctk
-class SudokuGrid(ctk.CTkFrame):
+class BlankSudokuGrid(ctk.CTkFrame):
     def __init__(self,parent):
         super().__init__(master=parent)
         self.entries = [[None for _ in range(9)] for _ in range(9)]

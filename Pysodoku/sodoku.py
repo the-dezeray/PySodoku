@@ -2,6 +2,10 @@ from dokusan import generators
 import numpy as np
 
 
+
+from dokusan import solvers
+from dokusan.boards import Sudoku,BoxSize
+import numpy as np
 class Box:
     def __init__(self):
         self.value = 0
@@ -43,8 +47,23 @@ def mutate_list(sudoku:list):
     }
     mutated_list = [mutation_map.get(num) for num in sudoku] 
     return mutated_list
-            
+def solved_sodoku(arr):
+    b =np.array(arr)
+    b = b.reshape(9,9)
+
+    b = sudoku = Sudoku.from_list(b,box_size =BoxSize(3,3))
+    b = solvers.backtrack(b)
+    b= list((str(b)))
+    b = [int(a) for a in b]
+    b = np.array(b)
+    a =b.reshape(9,9)
+    return a    
+
 arr = list(str(generators.random_sudoku(avg_rank =0)))
 arr =[int(num) for num in arr]
 arr = mutate_list(arr)
 print(f"{valid_rows(arr)} and {valid_colums(arr)}")
+def generate():
+    arr = list(str(generators.random_sudoku(avg_rank =150)))
+    arr =[int(num) for num in arr]
+    return arr

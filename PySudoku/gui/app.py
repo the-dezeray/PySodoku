@@ -1,8 +1,8 @@
 from typing import Tuple
 import pywinstyles
-from PySudoku.gui.left_frame import LeftFrame
-from PySudoku.gui.welcome_menu import WelcomeMenu
-from PySudoku.gui.game_play_frame import GamePlayFrame
+from gui.left_frame import LeftFrame
+from gui.welcome_menu import WelcomeMenu
+from gui.game_play_frame import GamePlayFrame
 import customtkinter as ctk
 
 class APP(ctk.CTk):

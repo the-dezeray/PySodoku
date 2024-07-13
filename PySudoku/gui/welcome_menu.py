@@ -1,6 +1,6 @@
 import customtkinter as ctk
-from PySudoku.gui.blank_sudoku_frame import BlankSudokuGrid
-from PySudoku.gui.game_play_frame import GamePlayFrame
+from gui.blank_sudoku_frame import BlankSudokuGrid
+from gui.game_play_frame import GamePlayFrame
 class WelcomeMenu(ctk.CTkFrame):
         def __init__(self,master):
             super().__init__(master,height=600,width=1000)

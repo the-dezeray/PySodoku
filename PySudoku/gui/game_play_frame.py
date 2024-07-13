@@ -2,8 +2,8 @@ from typing import Tuple
 import customtkinter as ctk
 import threading
 import keyboard
-from PySudoku.core.sodoku import generate,solved_sodoku
-from PySudoku.gui.sudoku_grid_frame import SudokuGrid
+from core.sodoku import generate,solved_sodoku
+from gui.sudoku_grid_frame import SudokuGrid
 class GamePlayFrame(ctk.CTkFrame):
     def __init__(self,master):
         super().__init__(master)

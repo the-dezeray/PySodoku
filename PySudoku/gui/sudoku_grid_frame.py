@@ -1,7 +1,7 @@
 import threading
 import keyboard
 import customtkinter as ctk
-from PySudoku.core.sodoku import generate,solved_sodoku
+from core.sodoku import generate,solved_sodoku
 class SudokuGrid(ctk.CTkFrame):
     def __init__(self,parent):
         self.solved_array = None

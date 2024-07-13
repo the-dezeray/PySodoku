@@ -17,21 +17,26 @@ class APP(ctk.CTk):
         self.right_menu = WelcomeFrame(self)
         self.right_menu.pack(side="right",padx=(0,100))
 
+    #Load a new sodoku game
     def render_new_game(self,level=None):
         self.right_menu.destroy()
         self.right_menu =  GamePlayFrame(self.master)
         self.right_menu.pack()
     
+    #Load an existing  sodoku game
     def render_exisiting_game(self,level=None):
         self.right_menu.destroy()
         self.right_menu =  GamePlayFrame(self.master)
 
+    #Load the Settines frame on the secondary frame
     def render_settings():
         pass
-    
+
+    #Load the Leaderboard frame on the secondary frame
     def render_leaderboard():
         pass
 
+    #Load the challanges frame on the secondary frame
     def render_challanges():
         pass
 def render_game():
@@ -40,6 +45,4 @@ def render_game():
     app.mainloop()
 
 if __name__ == "__main__":
-    app = APP()
-    app._state_before_windows_set_titlebar_color = 'zoomed'
-    app.mainloop()
+    render_game()

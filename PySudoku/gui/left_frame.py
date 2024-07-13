@@ -2,6 +2,7 @@ import customtkinter as ctk
 
 class LeftFrame(ctk.CTkFrame):
     def __init__(self,master):
+
         super().__init__(master=master,height =600,width=200)
         self.pack_propagate(False)
 

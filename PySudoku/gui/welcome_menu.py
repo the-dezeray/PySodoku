@@ -1,11 +1,12 @@
 import customtkinter as ctk
-from Pysodoku.gui.blank_sudoku_frame import BlankSudokuGrid
+from PySudoku.gui.blank_sudoku_frame import BlankSudokuGrid
+from PySudoku.gui.game_play_frame import GamePlayFrame
 class WelcomeMenu(ctk.CTkFrame):
         def __init__(self,master):
             super().__init__(master,height=600,width=1000)
-
+            self.master =master
             self.pack_propagate(False)
-    
+
             #The basic sodoku frame
             self.sudoku_grid : ctk.CTkFrame= BlankSudokuGrid(self)
             self.sudoku_grid.pack()
@@ -29,8 +30,9 @@ class WelcomeMenu(ctk.CTkFrame):
             #Continue saved game
             self.continue_game_button = ctk.CTkButton(self,text="continue")
             self.continue_game_button.pack(pady=(20,0))
-
             #Play a new game
-            self.new_game = ctk.CTkButton(self,text="new game")
+            self.new_game = ctk.CTkButton(self,text="new game",command=lambda : self.master.render_new_game(level = None))         
             self.new_game.pack(pady=(20,0))
+
+
 

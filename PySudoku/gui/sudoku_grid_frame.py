@@ -1,25 +1,7 @@
-from typing import Tuple
-import customtkinter as ctk
 import threading
 import keyboard
-from core.sodoku import generate,solved_sodoku
-class APP(ctk.CTk):
-    def __init__(self):
-        super().__init__()
-        self.title("Sudoku")
-        self.geometry("540x540")
-        ctk.CTkLabel(self,text="45 S",font=('Arial', 18)).pack(padx=(20,0))
-        self.center_frame= ctk.CTkFrame(self)
-        self.center_frame.pack(pady=(30,0))
-        self.smaller_frame=ctk.CTkFrame(self.center_frame,width=20,height=200)
-        self.smaller_frame.pack_propagate(False)
-        self.smaller_frame.pack(side="left",padx=(0,10))
-        self.frame= SudokuGrid(self.center_frame)
-        self.frame.pack(side="left")
-        self.number_frame=ctk.CTkFrame(self,height=30,width=400)
-        self.number_frame.pack_propagate(False)
-        
-        self.number_frame.pack(pady=(40,0))
+import customtkinter as ctk
+from PySudoku.core.sodoku import generate,solved_sodoku
 class SudokuGrid(ctk.CTkFrame):
     def __init__(self,parent):
         self.solved_array = None
@@ -133,8 +115,4 @@ class SudokuGrid(ctk.CTkFrame):
             if i % 3 == 0:
                 self.grid_rowconfigure(i, minsize=10)
                 self.grid_columnconfigure(i, minsize=10)
-
-if __name__ == "__main__":
-    app = APP()
-    app.mainloop()
 

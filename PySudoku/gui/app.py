@@ -1,8 +1,10 @@
 from typing import Tuple
 import pywinstyles
-from Pysodoku.gui.left_frame import LeftFrame
-from Pysodoku.gui.welcome_menu import WelcomeMenu
+from PySudoku.gui.left_frame import LeftFrame
+from PySudoku.gui.welcome_menu import WelcomeMenu
+from PySudoku.gui.game_play_frame import GamePlayFrame
 import customtkinter as ctk
+
 class APP(ctk.CTk):
     def __init__(self):
         super().__init__()
@@ -15,6 +17,19 @@ class APP(ctk.CTk):
         self.right_menu = WelcomeMenu(self)
         self.right_menu.pack(side="right",padx=(0,100))
 
+    def render_new_game(self,level=None):
+        self.right_menu.destroy()
+        self.right_menu =  GamePlayFrame(self.master)
+        self.right_menu.pack()
+    
+    def render_exisiting_game(self,level=None):
+        self.right_menu.destroy()
+        self.right_menu =  GamePlayFrame(self.master)
+
+def render_game():
+    app = APP()
+    app._state_before_windows_set_titlebar_color = 'zoomed'
+    app.mainloop()
 
 if __name__ == "__main__":
     app = APP()

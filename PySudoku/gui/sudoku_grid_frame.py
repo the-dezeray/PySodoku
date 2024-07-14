@@ -2,16 +2,26 @@ import threading
 import keyboard
 import customtkinter as ctk
 from core.sodoku import generate,solved_sodoku
+
+
 class SudokuGrid(ctk.CTkFrame):
     def __init__(self,parent):
-        self.solved_array = None
         super().__init__(master=parent)
-        self.entries = [[None for _ in range(9)] for _ in range(9)]
-        self.create_grid()
-        self.thread = []
-        self.stop_event  = threading.Event()
 
         self.arry = None
+        self.solved_array = None
+        self.entries = [[None for _ in range(9)] for _ in range(9)]
+        self.thread = []
+        self.stop_event  = threading.Event()
+        
+        self.highlight_selected_color : str= "blue"
+        self.highlight_similar: str = "yellow"
+        self.highlight_error_color: str = "red"
+        self.highlight_duplicate : str= "red"
+        self.hihglight_in_row_col_box : str= "yellow"
+        self.create_grid()
+    
+
     def fill(self,object:ctk.CTkButton):
         arry = ["1","2","3","4","5","6","7","8","9","backspace"]
         while True:
@@ -21,40 +31,45 @@ class SudokuGrid(ctk.CTkFrame):
                     self.thread.pop(0)
                     return 0
                 else:
-                    object.configure(text=a)
-                    b= self.solved_array
-                    if int(a) != b[object.row][object.col]:
-                        object.configure(fg_color ="red")
-                        for i in range(9):
-                            t =self.entries[object.row][i].cget("text")
-                            if int(a) ==  t:
-                                self.entries[object.row][i].configure(fg_color = "red")
-                        for i in range(9):
-                            if int(a) ==  self.entries[i][object.col].cget("text"):
-                                self.entries[i][object.col].configure(fg_color = "red")
-                        box_start_row = (object.row // 3) * 3
-                        box_start_col = (object.col // 3) * 3
-                        for row in range(box_start_row, box_start_row + 3):
-                            for col in range(box_start_col, box_start_col + 3):
-                                if int(a) ==  self.entries[i][object.col].cget("text"):
-                                    self.entries[i][object.col].configure(fg_color = "red")             
+                    self.update_sudoku_button(object,a)             
+        return None
+    
+    def update_sudoku_button(self,button:ctk.CTkButton,input_value:str):
 
-        return None
-        
-    def another(self,event):
-        object= event.widget.master
-        arry = ["1","2","3","4","5","6","7","8","9","backspace"]
-        while True:
-            a =keyboard.read_key()
-            if str(a) in arry:
-                if len(self.thread) > 1 and object.cget("text") in arry:
-                    self.thread.pop(0)
-                    return 0
-                else:
-                    object.configure(text=a)
-                    if int(a) != self.solved_array[object.row][object.col]:
-                        object.configure(text_color = "red")
-        return None
+        button.configure(text=input_value)
+        cur_row = button.row
+        cur_col = button.col
+        #if  value is incorrect apply effects on the recent entriie
+        if int(input_value) != self.solved_array[cur_row][cur_col]:
+            button.configure(fg_color =self.highlight_error_color)
+            #object.configure(text_color="red")
+
+            #highlight duplicates in row
+            for i in range(9):
+                _duplicate_entry :ctk.CTkButton= self.entries[cur_row][i]  
+
+                if int(input_value) == _duplicate_entry.cget("text"):  
+                    _duplicate_entry.configure(fg_color = self.highlight_duplicate,text_color = "")
+            
+            #highlight duplicates in row
+            for i in range(9):
+                _duplicate_entry = self.entries[i][cur_col]
+
+                if int(input_value) ==  _duplicate_entry.cget("text"):
+                    _duplicate_entry.configure(fg_color = self.highlight_duplicate)
+                    
+
+            #highlight similar in 3 x 3 box
+            box_start_row = (cur_row // 3) * 3
+            box_start_col = (cur_col // 3) * 3
+            for row in range(box_start_row, box_start_row + 3):
+                for col in range(box_start_col, box_start_col + 3):
+                    _duplicate_entry =  self.entries[i][cur_col]
+
+                    if int(input_value) ==  _duplicate_entry.cget("text"):
+                        _duplicate_entry.configure(fg_color = self.highlight_duplicate)
+
+
     def highlight_related(self, event):
 
         widget = event.widget
@@ -94,10 +109,13 @@ class SudokuGrid(ctk.CTkFrame):
         t = threading.Thread(target=self.fill,args=[event.widget.master],daemon=True)
         t.start()
         self.thread.append(t)
+
+
     def create_grid(self):
 
         arr =generate()
         self.solved_array = solved_sodoku(arr)
+ 
         for row in range(9):
             for col in range(9):
                 text = arr.pop(0)

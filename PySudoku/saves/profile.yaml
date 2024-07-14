@@ -16,4 +16,8 @@ file:
     hints: true
     highlight_similar: true
     animations: true
-    
+    color_pallete:   null
+  color_pallete:
+    dark_mode: null
+    minimal: null
+    light : null

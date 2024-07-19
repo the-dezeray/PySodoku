@@ -2,7 +2,13 @@ import numpy as np
 
 from dokusan import solvers,generators
 from dokusan.boards import Sudoku,BoxSize
-
+avg_rank_map ={
+"easy": 20,
+"medium":150,
+"hard":200,
+"extreme":350,
+"madness":300
+}
 def valid_colums(sudoku_list:list)->bool:
 
     if len(sudoku_list)!= 81: return False
@@ -48,7 +54,8 @@ def solved_sodoku(arr):
     a =b.reshape(9,9)
     return a    
 
-def generate():
-    arr = list(str(generators.random_sudoku(avg_rank =150)))
+def generate(level):
+    
+    arr = list(str(generators.random_sudoku(avg_rank =avg_rank_map[level])))
     arr =[int(num) for num in arr]
     return arr

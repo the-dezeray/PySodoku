@@ -4,45 +4,58 @@ from gui.left_frame import LeftFrame
 from gui.welcome_frame import WelcomeFrame
 from gui.game_play_frame import GamePlayFrame
 import customtkinter as ctk
-
+from gui.settings_frame import SettingsFrame
+from gui.leaderboard_frame import LeaderBoardFrame
+from gui.challanges_frame import ChallangesFrame
+from gui.game_ending_frame import GameEndingFrame
+from gui.config import Config
 class APP(ctk.CTk):
     def __init__(self):
         super().__init__()
 
         #Left menu
         self.left_menu = LeftFrame(self)
-        self.left_menu.pack(side="left")      
+        self.left_menu.pack(side="left",pady = (100,0))      
     
         #The is the a secondary frame when new winwos are made they replace this .. from the settings window , to the leader board or any other replace this frame    
         self.right_menu = WelcomeFrame(self)
-        self.right_menu.pack(side="right",padx=(0,100))
+        self.right_menu.pack(side="right",padx=(0,100),pady = (100,0))
 
     #Load a new sodoku game
-    def render_new_game(self,level=None):
+    def render_sudoku_grid(self,level=None,is_existing = False):
         self.right_menu.destroy()
-        self.right_menu =  GamePlayFrame(self.master)
-        self.right_menu.pack()
+        self.right_menu =  GamePlayFrame(self.master, level ,  is_existing)
+        self.right_menu.pack(side="right",padx=(0,100),pady = (100,0))
     
-    #Load an existing  sodoku game
-    def render_exisiting_game(self,level=None):
+    def render_settings(self):
         self.right_menu.destroy()
-        self.right_menu =  GamePlayFrame(self.master)
+        self.right_menu = SettingsFrame(master = self.master)
+        self.right_menu.pack(side="right",padx=(0,100),pady = (100,0))
+        
+    def render_leaderboard(self):
+        self.right_menu.destroy()
+        self.right_menu = LeaderBoardFrame(master = self.master)
+        self.right_menu.pack(side="right",padx=(0,100),pady = (100,0))
 
-    #Load the Settines frame on the secondary frame
-    def render_settings():
-        pass
+    def render_game_ending_frame(self,state:str = "win"):
+        self.right_menu.destroy()
+        self.right_menu = GameEndingFrame(master = self.master,state=state)
+        self.right_menu.pack(side="right",padx=(0,100),pady = (100,0))
+    
 
-    #Load the Leaderboard frame on the secondary frame
-    def render_leaderboard():
-        pass
+    def render_challanges(self):
+        self.right_menu.destroy()
+        self.right_menu = ChallangesFrame(master = self.master)
+        self.right_menu.pack(side="right",padx=(0,100),pady = (100,0))
 
-    #Load the challanges frame on the secondary frame
-    def render_challanges():
-        pass
-def render_game():
+
+
+
+def start_application():
+
     app = APP()
     app._state_before_windows_set_titlebar_color = 'zoomed'
     app.mainloop()
 
 if __name__ == "__main__":
-    render_game()
+    start_application()

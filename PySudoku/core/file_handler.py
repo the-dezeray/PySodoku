@@ -31,4 +31,5 @@ def write_save_file(filename, content):
         file.write(content)
         print(f"Content written to {filename}.")
 
-print(open_save_file("profile.yaml"))
+
+

@@ -1,4 +1,4 @@
-from gui.app import render_game
+from gui.app import start_application
 
 #Start Game
-render_game()
+start_application()

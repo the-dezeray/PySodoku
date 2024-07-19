@@ -2,8 +2,8 @@ import customtkinter as ctk
 from gui.config import Config
 
 
-class LeaderBoardFrame(ctk.CTkFrame):
-    def __init__(self,master):
+class GameEndingFrame(ctk.CTkFrame):
+    def __init__(self,master,state :str = "win"):
 
         super().__init__(
             master,

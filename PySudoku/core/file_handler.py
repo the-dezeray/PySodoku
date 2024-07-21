@@ -16,6 +16,8 @@ def get_save_file_path(filename):
 
     # Construct the full path to the file to open
     return os.path.join(saves_dir, filename)
+def  get_save_file():
+    return open_save_file("save.yaml")
 
 def open_save_file(filename):
     file_path = get_save_file_path(filename)
@@ -32,4 +34,8 @@ def write_save_file(filename, content):
         print(f"Content written to {filename}.")
 
 
-
+def write_to_yaml(content):
+    file_path = get_save_file_path("save.yaml")
+    
+    with open(file_path, 'w') as file:
+        yaml.safe_dump(content, file)

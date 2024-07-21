@@ -1,4 +1,4 @@
-from core.file_handler import open_save_file
+from core.file_handler import open_save_file,get_save_file,write_to_yaml
 class Config():
     default_button_text_color = "while"
     default_button_fg_color = "blue"
@@ -23,19 +23,33 @@ class Config():
     primary_frame_height = 600
     previous_game_level = "easy"
     
+    
     def load_exisiting_game(level :str = "easy"):
         pass
-    def saved_game_exists():
-        return 0
+    def saved_game_exists(cls,level):
+        content = get_save_file()
+        level = content["saved_games"][level]
+        if level["exists"] == True:
+            return True
+        else :
+            return False
 
     @classmethod
     def load_from_yaml(cls):
-        file_data = open_save_file("save.yaml")
+        file_data = get_save_file()
         config = file_data["config"]
         for key , value in config.items():
             if hasattr(cls,key):
                 setattr(cls,key,value)
 
     @classmethod
-    def capture_gama(cls,grid):
-        return 0
+    def capture_game(cls,grid,level,error_count,time):   
+        file_content = get_save_file()
+        game_entry = file_content["saved_games"][level]
+        file_content["saved_games"][level]["grid"] = grid
+        file_content["saved_games"][level]["level"] = level
+        file_content["saved_games"][level]["error_count"] = error_count
+        file_content["saved_games"][level]["time"] = time
+
+        # Step 3: Write the updated content back to the YAML file
+        write_to_yaml(file_content)

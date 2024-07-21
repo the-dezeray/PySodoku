@@ -1,0 +1,51 @@
+
+user_profile:
+  user_name: "Desiree Chingwaru"
+  player_id: null
+  user_level: 0
+  current_xp : 0
+  archieve_ments: null
+  user_image: 0
+saved_games:
+  easy:
+    exist: False
+    error: 0
+    hints: true
+    time : 0 
+    grid : 0
+  medium: null
+  hard: null
+  extreme: null
+settings:
+  dark_mode: false
+  hints: true
+  highlight_similar: true
+  animations: true
+  color_pallete:   null
+color_pallete:
+  dark_mode: null
+  minimal: null
+  light : null
+  
+config:
+  default_button_text_color : "white"
+  default_button_fg_color : "blue"
+  default_button_hover_color : "green"
+  corner_radius : 2,
+  default_button_font_family : 'arial'
+  default_button_size  : 3
+  default_button_color : "blue"
+  default_text_color : "white"
+  
+  highlight_selected_color : "blue"
+  highlight_similar  : "yellow"
+  highlight_error_color   : "red"
+  highlight_duplicate   : "red"
+  hihglight_in_row_col_box   : "yellow"
+
+  default_chapter_label_font_family : ""
+  default_chapter_label_font_size : ""
+  default_chapter_lable_text_color: ""
+
+  primary_frame_width : 1000
+  primary_frame_height : 600

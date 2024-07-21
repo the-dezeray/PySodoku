@@ -33,7 +33,12 @@ class SudokuGrid(ctk.CTkFrame):
                     return 0
                 else:
                     self.update_sudoku_button(object,a)
-                    Config.capture_game(self.grid_screenshot(),self.level,self.error_count,self.time)             
+                    Config.capture_game( 
+                        grid = self.grid_screenshot(),
+                        level= self.level,
+                        error_count = self.error_count,
+                        time= self.time
+                        )             
         return None
     
     def update_sudoku_button(self,button:ctk.CTkButton,input_value:str):

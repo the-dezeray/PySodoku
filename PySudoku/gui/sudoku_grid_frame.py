@@ -33,11 +33,14 @@ class SudokuGrid(ctk.CTkFrame):
                     return 0
                 else:
                     self.update_sudoku_button(object,a)
+
+                    #capture current game to yaml save file 
                     Config.capture_game( 
                         grid = self.grid_screenshot(),
                         level= self.level,
                         error_count = self.error_count,
-                        time= self.time
+                        time= self.time,
+                        solved_grid = self.solved_array
                         )             
         return None
     
@@ -54,7 +57,7 @@ class SudokuGrid(ctk.CTkFrame):
 
             #highlight duplicates in row
             for i in range(9):
-                _duplicate_entry :ctk.CTkButton= self.entries[cur_row][i]  
+                _duplicate_entry :ctk.CTkButton = self.entries[cur_row][i]  
 
                 if int(input_value) == _duplicate_entry.cget("text"):  
                     _duplicate_entry.configure(fg_color = Config.highlight_duplicate)
@@ -79,6 +82,18 @@ class SudokuGrid(ctk.CTkFrame):
         if self._grid_complete():
             self._game_won_event()
 
+    def highlight_errors(self)->bool:
+        for row in range(9):
+            for col in range(9):
+                value = self.entries[row][col].cget("text")
+                if value == "" or value == " ":
+                    continue
+                solved = self.solved_array[row][col]
+                a= int(value)
+                b = int(solved)
+                if int(value) !=  int(solved):
+                    self.entries[row][col].configure(fg_color = Config.highlight_duplicate)
+
     def _grid_complete(self)->bool:
         for col in range(9):
             for row in range(9):
@@ -89,6 +104,7 @@ class SudokuGrid(ctk.CTkFrame):
                     return False
                 
         return True    
+    
     def _game_won_event(self):
         a = 2
         ma =  self.master
@@ -97,8 +113,8 @@ class SudokuGrid(ctk.CTkFrame):
         a= 0
         ma.render_new_game()
 
-    def highlight_related(self, event):
-
+    def highlight_related(self, event,master = None):
+        
         widget = event.widget
         selected_row = widget.master.row
         selected_col = widget.master.col
@@ -134,16 +150,33 @@ class SudokuGrid(ctk.CTkFrame):
         self.thread.append(t)
 
     def grid_screenshot(self)->list:
-        return [[self.entries[row][col].cget("text") for col in range(9)]for row in range(9)]
+        grid_array = [[self.entries[row][col].cget("text") for col in range(9)]for row in range(9)]
+        grid_string = ""
+        for row in range(9):
+            for col in range(9):
+                entry = str(grid_array[row][col])
+                if entry == "": entry = " "
+                grid_string += entry
+        return grid_string
+    
+    def to_string(array):
+        modified = []
+        for i  in array:
+            if i == "" or i == " ":
+                modified.append(0)
+            else :
+                modified.append(int(i))
+        return modified
+    
     def create_grid(self):
         arr= 0 
         if self.is_existing:
-            array  =  Config.load_exsting_game(level=self.level)
+            arr  =  Config.load_existing_game(level=self.level)
+            self.solved_array = Config.load_exsting_solved(level=self.level)
         else : 
             arr =generate(self.level)
-
-        self.solved_array = solved_sodoku(arr)
- 
+            self.solved_array = solved_sodoku(arr)
+            
         for row in range(9):
             for col in range(9):
                 text = arr.pop(0)
@@ -156,10 +189,11 @@ class SudokuGrid(ctk.CTkFrame):
                 entry.bind("<Button-1>",self.insert_input2)
                 self.entries[row][col] = entry
         
-
         # Create thicker lines for separating 3x3 grids
-        for i in range(1, 9):
+        for i in range(1,9):
             if i % 3 == 0:
                 self.grid_rowconfigure(i, minsize=10)
                 self.grid_columnconfigure(i, minsize=10)
+ 
 
+        self.highlight_errors()

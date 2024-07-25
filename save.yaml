@@ -49,3 +49,56 @@ config:
 
   primary_frame_width : 1000
   primary_frame_height : 600
+
+
+
+  color_pallete:
+  dark_mode: null
+  light: null
+  minimal: null
+config:
+  corner_radius: 2,
+  default_button_color: blue
+  default_button_fg_color: blue
+  default_button_font_family: arial
+  default_button_hover_color: green
+  default_button_size: 3
+  default_button_text_color: white
+  default_chapter_label_font_family: ''
+  default_chapter_label_font_size: ''
+  default_chapter_lable_text_color: ''
+  default_text_color: white
+  highlight_duplicate: red
+  highlight_error_color: red
+  highlight_selected_color: blue
+  highlight_similar: yellow
+  hihglight_in_row_col_box: yellow
+  primary_frame_height: 600
+  primary_frame_width: 1000
+saved_games:
+  easy:
+    array: 0
+    error: 0
+    error_count: 0
+    grid: 5248127 312 3 48 6 93  7 2 2189 5   34917628567522 9 19814 3672 367 955
+      752681349
+    hints: true
+    level: easy
+    solved_grid : 0
+    time: ''
+  extreme: madness
+  hard: null
+  medium: null
+settings:
+  animations: true
+  color_pallete: null
+  dark_mode: false
+  highlight_similar: true
+  hints: true
+user_profile:
+  archieve_ments: null
+  current_xp: 0
+  player_id: null
+  user_image: 0
+  user_level: 0
+  user_name: Desiree Chingwaru

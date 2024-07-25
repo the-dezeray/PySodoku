@@ -1,5 +1,5 @@
 from typing import Tuple
-import pywinstyles
+
 from gui.left_frame import LeftFrame
 from gui.welcome_frame import WelcomeFrame
 from gui.game_play_frame import GamePlayFrame
@@ -9,6 +9,7 @@ from gui.leaderboard_frame import LeaderBoardFrame
 from gui.challanges_frame import ChallangesFrame
 from gui.game_ending_frame import GameEndingFrame
 from gui.config import Config
+ctk.set_appearance_mode("Dark") 
 class APP(ctk.CTk):
     def __init__(self):
         super().__init__()

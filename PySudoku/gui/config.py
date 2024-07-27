@@ -19,7 +19,7 @@ class Config():
     default_chapter_label_font_size = ""
     default_chapter_lable_text_color= ""
 
-    primary_frame_width = 1000
+    primary_frame_width = 600
     primary_frame_height = 600
     previous_game_level = "easy"
     def load_exsting_solved(level):

@@ -15,12 +15,12 @@ class APP(ctk.CTk):
         super().__init__()
 
         #Left menu
-        self.left_menu = LeftFrame(self)
-        self.left_menu.pack(side="left",pady = (100,0))      
+        self.left_menu : ctk.CTkFrame= LeftFrame(self)
+        self.left_menu.pack(side="left",fill ="y",expand =True,)      
     
         #The is the a secondary frame when new winwos are made they replace this .. from the settings window , to the leader board or any other replace this frame    
         self.right_menu = WelcomeFrame(self)
-        self.right_menu.pack(side="right",padx=(0,100),pady = (100,0))
+        self.right_menu.pack(side="left",expand= True,fill = "both")
 
     #Load a new sodoku game
     def render_sudoku_grid(self,level=None,is_existing = False):
@@ -55,7 +55,7 @@ class APP(ctk.CTk):
 def start_application():
 
     app = APP()
-    app._state_before_windows_set_titlebar_color = 'zoomed'
+    #app._state_before_windows_set_titlebar_color = 'zoomed'
     app.mainloop()
 
 if __name__ == "__main__":

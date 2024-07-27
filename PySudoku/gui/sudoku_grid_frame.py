@@ -8,7 +8,7 @@ from gui.config import Config
 class SudokuGrid(ctk.CTkFrame):
 
     def __init__(self,parent,level,is_existing):
-        super().__init__(master=parent)
+        super().__init__(master=parent,fg_color="#050707")
 
         self.level = level
         self.is_existing = is_existing
@@ -197,3 +197,4 @@ class SudokuGrid(ctk.CTkFrame):
  
 
         self.highlight_errors()
+

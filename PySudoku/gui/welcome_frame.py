@@ -2,6 +2,10 @@ import customtkinter as ctk
 from gui.blank_sudoku_frame import BlankSudokuGrid
 from gui.game_play_frame import GamePlayFrame
 from gui.config import Config
+import os
+from PIL import Image ,ImageTk
+
+
 class WelcomeFrame(ctk.CTkFrame):
       def __init__(self,master):
             super().__init__(
@@ -9,37 +13,44 @@ class WelcomeFrame(ctk.CTkFrame):
                   height=Config.primary_frame_height,
                   
                   width=Config.primary_frame_width,
+                  fg_color="#050707"
                   )
             self.master =master
             self.pack_propagate(False)
             self.current = Config.previous_game_level
             #The basic sodoku frame
             self.sudoku_grid : ctk.CTkFrame= BlankSudokuGrid(self)
-            self.sudoku_grid.pack()
-            
+            self.sudoku_grid.pack(pady = (50,0))
+
+            file_path = os.path.dirname(os.path.realpath(__file__))
+            skull  =ctk.CTkImage(Image.open(file_path +"/skull.png"),size = (20,20))            
+                    
             self.levels =["easy","medium","hard","extreme","madness"]
+            
+            self.new_game = ctk.CTkButton(self,text="",image=skull,fg_color ="transparent",text_color="#868bab")         
+            self.new_game.pack(pady=(20,5))
             #Frame 
             self.level_select_frame =ctk.CTkFrame(self)
-            self.level_select_frame.pack(anchor ="n",pady=(40,0))
+            self.level_select_frame.pack(anchor ="n",pady=(0,0))
             
             #Goto to the previous selected level button
-            self.previous_level_button = ctk.CTkButton(self.level_select_frame,text="<",width=10,height=10,command=lambda:self.switch_level(1))
+            self.previous_level_button = ctk.CTkButton(self.level_select_frame,text="<",width=10,height=10,command=lambda:self.switch_level(1),fg_color ="transparent",text_color="#455263")
             self.previous_level_button.pack(padx=(5,10),side="left")
             self.current_level ="easy"
             #Current Level Label 
-            self.current_level_button = ctk.CTkButton(self.level_select_frame,text="easy")
+            self.current_level_button = ctk.CTkButton(self.level_select_frame,text="easy",fg_color ="transparent",text_color="#455263")
             self.current_level_button.pack(padx=5 ,side="left")
 
             #Goto to the next level Button
-            self.next_level_button = ctk.CTkButton(self.level_select_frame,text=">",width=10,command=lambda:self.switch_level(1))
+            self.next_level_button = ctk.CTkButton(self.level_select_frame,text=">",width=10,command=lambda:self.switch_level(1),fg_color ="transparent",text_color="#455263")
             self.next_level_button.pack(padx=(10,5),side="left")
                   
             #Continue saved game
             #$if Config.saved_game_exists():
-            self.continue_game_button = ctk.CTkButton(self,text="continue",command= lambda : self.master.render_sudoku_grid(level = self.current_level,is_existing = True))
+            self.continue_game_button = ctk.CTkButton(self,text="continue",command= lambda : self.master.render_sudoku_grid(level = self.current_level,is_existing = True),fg_color ="transparent",text_color="#455263")
             self.continue_game_button.pack(pady=(20,0))
             #Play a new game
-            self.new_game = ctk.CTkButton(self,text="new game",command = lambda : self.master.render_sudoku_grid(level = self.current_level,is_existing = False))         
+            self.new_game = ctk.CTkButton(self,text="new game",command = lambda : self.master.render_sudoku_grid(level = self.current_level,is_existing = False),fg_color ="transparent",text_color="#868bab")         
             self.new_game.pack(pady=(20,0))
 
       def switch_level(self,distance):

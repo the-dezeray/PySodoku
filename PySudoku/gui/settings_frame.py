@@ -9,3 +9,4 @@ class SettingsFrame(ctk.CTkFrame):
             master,
             width= Config.primary_frame_height,
             height = Config.primary_frame_width)
+        

@@ -1,13 +1,13 @@
 from core.file_handler import open_save_file,get_save_file,write_to_yaml
 class Config():
-    default_button_text_color = "while"
+    default_button_text_color = "#314876"
     default_button_fg_color = "blue"
     default_button_hover_color = "green"
     corner_radius = 2,
     default_button_font_family = 'arial'
     default_button_size  = 3
     default_button_color = "blue"
-    default_text_color = "while"
+    default_text_color = "#e3e6eb"
     
     highlight_selected_color : str= "blue"
     highlight_similar: str = "yellow"
@@ -17,9 +17,10 @@ class Config():
 
     default_chapter_label_font_family = ""
     default_chapter_label_font_size = ""
-    default_chapter_lable_text_color= ""
+    default_chapter_label_text_color= "#e5f1f4"
 
     primary_frame_width = 600
+    primary_frame_color = "#050707"
     primary_frame_height = 600
     previous_game_level = "easy"
     def load_exsting_solved(level):

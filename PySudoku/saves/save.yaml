@@ -9,11 +9,11 @@ config:
   default_button_font_family: arial
   default_button_hover_color: green
   default_button_size: 3
-  default_button_text_color: white
+  default_button_text_color: #e3e6eb
   default_chapter_label_font_family: ''
   default_chapter_label_font_size: ''
   default_chapter_lable_text_color: ''
-  default_text_color: white
+  default_text_color: #e3e6eb
   highlight_duplicate: red
   highlight_error_color: red
   highlight_selected_color: blue

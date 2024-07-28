@@ -6,7 +6,7 @@ from gui.config import Config
 from core.sodoku import generate,solved_sodoku
 from gui.sudoku_grid_frame import SudokuGrid
 class GamePlayFrame(ctk.CTkFrame):
-    def __init__(self,master,level,is_existing):
+    def __init__(self,master,**kwargs):
         super().__init__(master,
                          width= Config.primary_frame_width,
                          height= Config.primary_frame_height
@@ -19,7 +19,7 @@ class GamePlayFrame(ctk.CTkFrame):
         self.smaller_frame.pack_propagate(False)
         self.smaller_frame.pack(side="left",padx=(0,10))
         
-        self.frame= SudokuGrid(self.center_frame,level,is_existing)
+        self.frame= SudokuGrid(self.center_frame,**kwargs)
         self.frame.pack(side="left")
         self.number_frame=ctk.CTkFrame(self,height=30,width=400)
         self.number_frame.pack_propagate(False)

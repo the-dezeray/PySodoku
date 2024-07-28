@@ -7,11 +7,14 @@ from gui.config import Config
 
 class SudokuGrid(ctk.CTkFrame):
 
-    def __init__(self,parent,level,is_existing):
+    def __init__(self,parent,**kwargs):
         super().__init__(master=parent,fg_color="#050707")
-
-        self.level = level
-        self.is_existing = is_existing
+        if "level" in kwargs:
+            self.level =  kwargs.pop("level")
+        if "is_existing" in kwargs:
+            self.is_existing =  kwargs.pop("is_existing")
+        
+        
         self.arry = None
         self.solved_array = None
         self.entries = [[None for _ in range(9)] for _ in range(9)]

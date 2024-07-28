@@ -35,11 +35,15 @@ class LeftFrame(ctk.CTkFrame):
 
         self.leaderboard = ctk.CTkButton(self,text_color="#434e5e",image=leaderboard ,compound = "left",text ="Leaderboard",fg_color="transparent",anchor = "w")
         self.leaderboard.pack(pady=10,padx =2)
-
-        self.settings = ctk.CTkButton(self,text ="Settings",text_color="#434e5e",image=settings ,compound = "left",fg_color="transparent",anchor = "w")
+        from gui.settings_frame import SettingsFrame
+        self.settings = ctk.CTkButton(self,text ="Settings",text_color="#434e5e",image=settings ,compound = "left",fg_color="transparent",anchor = "w",command= lambda:self.master.render_frame(frame = SettingsFrame))
         self.settings.pack(pady=10,padx =2)
 
         self.about_us= ctk.CTkButton(self,text ="About us",fg_color="transparent",image=about ,compound = "left",text_color="#434e5e",anchor = "w")
         self.about_us.pack(pady=5,padx =2,side = "bottom")
         self.exit= ctk.CTkButton(self,text ="Exit",fg_color="transparent",anchor = "w",text_color="#434e5e",image=close ,compound = "left")
         self.exit.pack(pady=(0,5),padx =2,side = "bottom")
+class NavigationButton(ctk.CTkButton):
+    def __init__(self, master,text,command):
+        pass
+    

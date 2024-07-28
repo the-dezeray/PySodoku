@@ -49,6 +49,7 @@ config:
 
   primary_frame_width : 1000
   primary_frame_height : 600
+  primary_frame_color : "#050707"
 
 
 

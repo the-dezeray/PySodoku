@@ -13,7 +13,7 @@ class WelcomeFrame(ctk.CTkFrame):
                   height=Config.primary_frame_height,
                   
                   width=Config.primary_frame_width,
-                  fg_color="#050707"
+                  fg_color= Config.primary_frame_color
                   )
             self.master =master
             self.pack_propagate(False)
@@ -50,7 +50,7 @@ class WelcomeFrame(ctk.CTkFrame):
             self.continue_game_button = ctk.CTkButton(self,text="continue",command= lambda : self.master.render_sudoku_grid(level = self.current_level,is_existing = True),fg_color ="transparent",text_color="#455263")
             self.continue_game_button.pack(pady=(20,0))
             #Play a new game
-            self.new_game = ctk.CTkButton(self,text="new game",command = lambda : self.master.render_sudoku_grid(level = self.current_level,is_existing = False),fg_color ="transparent",text_color="#868bab")         
+            self.new_game = ctk.CTkButton(self,text="new game",command = lambda : self.master.render_frame(GamePlayFrame,level = self.current_level,is_existing = False),fg_color ="transparent",text_color="#868bab")         
             self.new_game.pack(pady=(20,0))
 
       def switch_level(self,distance):

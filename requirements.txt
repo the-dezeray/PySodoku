@@ -1,0 +1,5 @@
+dokusan
+pillow
+customtkinter
+keyboard
+PyYaml

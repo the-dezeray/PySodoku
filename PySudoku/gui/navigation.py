@@ -5,17 +5,17 @@ import customtkinter as ctk
 class LeftFrame(ctk.CTkFrame):
     def __init__(self,master):
         file_path = os.path.dirname(os.path.realpath(__file__))
-        settings  =ctk.CTkImage(Image.open(file_path +"/settings.png"),size = (20,20))            
+        settings  =ctk.CTkImage(Image.open(file_path +"/assets/settings.png"),size = (20,20))            
         file_path = os.path.dirname(os.path.realpath(__file__))
-        leaderboard  =ctk.CTkImage(Image.open(file_path +"/leaderboard.png"),size = (20,20))            
+        leaderboard  =ctk.CTkImage(Image.open(file_path +"/assets/leaderboard.png"),size = (20,20))            
         file_path = os.path.dirname(os.path.realpath(__file__))
-        close  =ctk.CTkImage(Image.open(file_path +"/close.png"),size = (20,20))            
+        close  =ctk.CTkImage(Image.open(file_path +"/assets/close.png"),size = (20,20))            
         file_path = os.path.dirname(os.path.realpath(__file__))
-        about  =ctk.CTkImage(Image.open(file_path +"/about-us.png"),size = (20,20))            
+        about  =ctk.CTkImage(Image.open(file_path +"/assets/about-us.png"),size = (20,20))            
         file_path = os.path.dirname(os.path.realpath(__file__))
-        challange  =ctk.CTkImage(Image.open(file_path +"/challange.png"),size = (20,20))            
+        challange  =ctk.CTkImage(Image.open(file_path +"/assets/challange.png"),size = (20,20))            
         file_path = os.path.dirname(os.path.realpath(__file__))
-        play  =ctk.CTkImage(Image.open(file_path +"/play.png"),size = (20,20))            
+        play  =ctk.CTkImage(Image.open(file_path +"/assets/play.png"),size = (20,20))            
                                                                     
         
 

@@ -23,7 +23,7 @@ class WelcomeFrame(ctk.CTkFrame):
             self.sudoku_grid.pack(pady = (50,0))
 
             file_path = os.path.dirname(os.path.realpath(__file__))
-            skull  =ctk.CTkImage(Image.open(file_path +"/skull.png"),size = (20,20))            
+            skull  =ctk.CTkImage(Image.open(file_path +"/assets/skull.png"),size = (20,20))            
                     
             self.levels =["easy","medium","hard","extreme","madness"]
             

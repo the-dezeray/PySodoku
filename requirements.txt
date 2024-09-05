@@ -3,3 +3,4 @@ pillow
 customtkinter
 keyboard
 PyYaml
+numpy

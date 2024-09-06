@@ -14,7 +14,7 @@ config:
   default_chapter_label_font_size: ''
   default_chapter_lable_text_color: ''
   default_text_color: #e3e6eb
-  highlight_duplicate: red
+  highlight_duplicate: blue
   highlight_error_color: red
   highlight_selected_color: blue
   highlight_similar: yellow

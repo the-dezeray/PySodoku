@@ -9,12 +9,12 @@ from gui.leaderboard_frame import LeaderBoardFrame
 from gui.challanges_frame import ChallangesFrame
 from gui.game_ending_frame import GameEndingFrame
 from gui.config import Config
-ctk.set_appearance_mode("Dark") 
+ctk.set_appearance_mode(Config.color_mode) 
+
 class APP(ctk.CTk):
     def __init__(self):
         super().__init__()
 
-        #Left menu
         self.navigation : ctk.CTkFrame= LeftFrame(self)
         self.navigation.pack(side="left",fill ="y",expand =True,)      
     
@@ -30,9 +30,7 @@ class APP(ctk.CTk):
 
         
 def start_application():
-
     app = APP()
-    #app._state_before_windows_set_titlebar_color = 'zoomed'
     app.mainloop()
 
 if __name__ == "__main__":

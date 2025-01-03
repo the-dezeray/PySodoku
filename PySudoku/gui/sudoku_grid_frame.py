@@ -144,7 +144,7 @@ class SudokuGrid(ctk.CTkFrame):
         # Reset all cells' background color
         for row in range(9):
             for col in range(9):
-                self.entries[row][col].configure(fg_color=Config.default_button_color)
+                self.entries[row][col].configure(fg_color="red")
 
     def insert_input2(self,event):
 
@@ -184,7 +184,7 @@ class SudokuGrid(ctk.CTkFrame):
             for col in range(9):
                 text = arr.pop(0)
                 if text == 0: text = ""
-                entry = ctk.CTkButton(self, width=40,height= 40, text=text,font=('Arial', 18), border_width=1,corner_radius=4)
+                entry = ctk.CTkButton(self, width=40,height= 40,fg_color= Config.default_button_color, text=text,font=('Arial', 18), border_width=1,corner_radius=4)
                 entry.row = row
                 entry.col = col
                 entry.grid(row=row, column=col, padx=(2, 2) if col % 3 != 2 else (2, 6), pady=(2, 2) if row % 3 != 2 else (2, 6))

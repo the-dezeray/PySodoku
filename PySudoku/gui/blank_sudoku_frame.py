@@ -8,7 +8,7 @@ class BlankSudokuGrid(ctk.CTkFrame):
     def create_grid(self):
         for row in range(9):
             for col in range(9):
-                entry = ctk.CTkButton(self, width=30,height= 30, text="  ",font=('Arial', 18), border_width=1,corner_radius=4,fg_color="#030404",border_color="#021315")
+                entry = ctk.CTkButton(self, width=30,height= 30, text="  ",font=('Arial', 18), border_width=1,corner_radius=4,fg_color="#030404",border_color="orange")
                 entry.grid(row=row, column=col, padx=(2, 2) if col % 3 != 2 else (2, 6), pady=(2, 2) if row % 3 != 2 else (2, 6))
                 self.entries[row][col] = entry
 

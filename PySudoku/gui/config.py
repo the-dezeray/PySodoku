@@ -6,15 +6,16 @@ class Config():
     corner_radius = 2,
     default_button_font_family = 'arial'
     default_button_size  = 3
-    default_button_color = "blue"
+    default_button_color = "#030404"
     default_text_color = "#e3e6eb"
-    
+    nav_btn_text_color = "#e9edf0"
+    nav_btn_progress_color= "#e9edf0"
     highlight_selected_color : str= "blue"
     highlight_similar: str = "yellow"
     highlight_error_color: str = "red"
     highlight_duplicate : str= "red"
     hihglight_in_row_col_box : str= "yellow"
-
+    color_mode = "dark" 
     default_chapter_label_font_family = ""
     default_chapter_label_font_size = ""
     default_chapter_label_text_color= "#e5f1f4"

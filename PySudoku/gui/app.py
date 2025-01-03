@@ -19,7 +19,7 @@ class APP(ctk.CTk):
         self.navigation.pack(side="left",fill ="y",expand =True,)      
     
         #The is the a secondary frame when new winwos are made they replace this .. from the settings window , to the leader board or any other replace this frame    
-        self.frame : ctk.CTkFrame = SettingsFrame(self)
+        self.frame : ctk.CTkFrame =WelcomeFrame(self)
         self.frame.pack(side="left",expand= True,fill = "both")
 
     

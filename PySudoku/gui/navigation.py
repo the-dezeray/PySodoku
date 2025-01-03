@@ -41,7 +41,7 @@ class LeftFrame(ctk.CTkFrame):
 
         self.about_us= ctk.CTkButton(self,text ="About us",fg_color="transparent",image=about ,compound = "left",text_color="#434e5e",anchor = "w")
         self.about_us.pack(pady=5,padx =2,side = "bottom")
-        self.exit= ctk.CTkButton(self,text ="Exit",fg_color="transparent",anchor = "w",text_color="#434e5e",image=close ,compound = "left")
+        self.exit= ctk.CTkButton(self,text ="Exit",fg_color="transparent",command=lambda: exit(),anchor = "w",text_color="#434e5e",image=close ,compound = "left")
         self.exit.pack(pady=(0,5),padx =2,side = "bottom")
 class NavigationButton(ctk.CTkButton):
     def __init__(self, master,text,command):

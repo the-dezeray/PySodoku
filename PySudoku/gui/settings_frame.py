@@ -1,3 +1,4 @@
+"""i towkrs"""
 import customtkinter as ctk
 from gui.config import Config
 

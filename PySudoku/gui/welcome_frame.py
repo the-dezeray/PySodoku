@@ -11,7 +11,6 @@ class WelcomeFrame(ctk.CTkFrame):
             super().__init__(
                   master,
                   height=Config.primary_frame_height,
-                  
                   width=Config.primary_frame_width,
                   fg_color= Config.primary_frame_color
                   )
@@ -22,6 +21,12 @@ class WelcomeFrame(ctk.CTkFrame):
             self.sudoku_grid : ctk.CTkFrame= BlankSudokuGrid(self)
             self.sudoku_grid.pack(pady = (50,0))
 
+<<<<<<< HEAD
+=======
+            file_path = os.path.dirname(os.path.realpath(__file__))
+            skull  =ctk.CTkImage(Image.open(file_path +"/assets/skull.png"),size = (20,20))            
+                        
+>>>>>>> 12cb7414d9e9a23e476ac5315b1c920f20f09f6b
             self.levels =["easy","medium","hard","extreme","madness"]
             
             self.new_game = ctk.CTkButton(self,text="",image=skull,fg_color ="transparent",text_color="#868bab")         
@@ -44,7 +49,7 @@ class WelcomeFrame(ctk.CTkFrame):
                   
             #Continue saved game
             #$if Config.saved_game_exists():
-            self.continue_game_button = ctk.CTkButton(self,text="continue",command= lambda : self.master.render_sudoku_grid(level = self.current_level,is_existing = True),fg_color ="transparent",text_color="#455263")
+            self.continue_game_button = ctk.CTkButton(self,text="continue",command= lambda : self.master.render_frame(GamePlayFrame,level = self.current_level,is_existing = True),fg_color ="transparent",text_color="#455263")
             self.continue_game_button.pack(pady=(20,0))
             #Play a new game
             self.new_game = ctk.CTkButton(self,text="new game",command = lambda : self.master.render_frame(GamePlayFrame,level = self.current_level,is_existing = False),fg_color ="transparent",text_color="#868bab")         
@@ -64,22 +69,3 @@ class WelcomeFrame(ctk.CTkFrame):
             if Config.saved_game_exists():
                   pass
                   
-            
-"""            
-        def create_button(master,text:str,width,command)->ctk.CTkButton:
-              return ctk.CTkButton(
-                    master=master,
-                    text=text,
-                    width=width,
-                    command=command,
-                    text_color=Config.default_button_text_color,
-                    fg_color=Config.default_button_fg_color,
-                    hover_color=Config.default_button_hover_color,
-                    corner_radius=Config.corner_radius,
-                    font = ctk.CTkFont(
-                          family=Config.default_button_font_family,
-                          size=Config.default_button_size
-                          )
-                    )
-
-"""

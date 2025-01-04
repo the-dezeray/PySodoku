@@ -6,7 +6,7 @@ from gui.leaderboard_frame import LeaderBoardFrame
 from gui.welcome_frame  import WelcomeFrame
 from gui.icons import file_path,settings,leaderboard,close,about,challange,play
 from gui.config import Config
-from assets.btn import nav_btn
+from gui.btn import nav_btn
 class LeftFrame(ctk.CTkFrame):
     def __init__(self,master):
 

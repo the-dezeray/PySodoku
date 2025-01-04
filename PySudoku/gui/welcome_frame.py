@@ -4,7 +4,7 @@ from gui.game_play_frame import GamePlayFrame
 from gui.config import Config
 import os
 from PIL import Image ,ImageTk
-
+from gui.icons import skull
 
 class WelcomeFrame(ctk.CTkFrame):
       def __init__(self,master):
@@ -22,9 +22,6 @@ class WelcomeFrame(ctk.CTkFrame):
             self.sudoku_grid : ctk.CTkFrame= BlankSudokuGrid(self)
             self.sudoku_grid.pack(pady = (50,0))
 
-            file_path = os.path.dirname(os.path.realpath(__file__))
-            skull  =ctk.CTkImage(Image.open(file_path +"/skull.png"),size = (20,20))            
-                    
             self.levels =["easy","medium","hard","extreme","madness"]
             
             self.new_game = ctk.CTkButton(self,text="",image=skull,fg_color ="transparent",text_color="#868bab")         

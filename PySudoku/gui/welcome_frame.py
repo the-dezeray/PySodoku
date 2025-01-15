@@ -21,12 +21,6 @@ class WelcomeFrame(ctk.CTkFrame):
             self.sudoku_grid : ctk.CTkFrame= BlankSudokuGrid(self)
             self.sudoku_grid.pack(pady = (50,0))
 
-<<<<<<< HEAD
-=======
-            file_path = os.path.dirname(os.path.realpath(__file__))
-            skull  =ctk.CTkImage(Image.open(file_path +"/assets/skull.png"),size = (20,20))            
-                        
->>>>>>> 12cb7414d9e9a23e476ac5315b1c920f20f09f6b
             self.levels =["easy","medium","hard","extreme","madness"]
             
             self.new_game = ctk.CTkButton(self,text="",image=skull,fg_color ="transparent",text_color="#868bab")         

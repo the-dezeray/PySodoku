@@ -14,7 +14,6 @@ class SudokuGrid(ctk.CTkFrame):
         if "is_existing" in kwargs:
             self.is_existing =  kwargs.pop("is_existing")
         
-        
         self.arry = None
         self.solved_array = None
         self.entries = [[None for _ in range(9)] for _ in range(9)]
@@ -22,21 +21,20 @@ class SudokuGrid(ctk.CTkFrame):
         self.stop_event  = threading.Event()
         self.time=""
         self.error_count = 0
-          
+    
         self.create_grid()
     
 
     def fill(self,object:ctk.CTkButton):
         arry = ["1","2","3","4","5","6","7","8","9","backspace"]
         while True:
-            a =keyboard.read_key()
-            if str(a) in arry:
+            key = keyboard.read_key()
+            if str(key) in arry:
                 if len(self.thread) > 1 and object.cget("text") in arry:
                     self.thread.pop(0)
                     return 0
                 else:
-                    self.update_sudoku_button(object,a)
-
+                    self.update_sudoku_button(object,key)
                     #capture current game to yaml save file 
                     Config.capture_game( 
                         grid = self.grid_screenshot(),
@@ -48,8 +46,11 @@ class SudokuGrid(ctk.CTkFrame):
         return None
     
     def update_sudoku_button(self,button:ctk.CTkButton,input_value:str):
-
+        
+        if input_value == "backspace":
+            input_value = ""
         button.configure(text=input_value)
+        
         cur_row = button.row
         cur_col = button.col
         #if  value is incorrect apply effects on the recent entriie
@@ -116,35 +117,43 @@ class SudokuGrid(ctk.CTkFrame):
         a= 0
         ma.render_new_game()
 
-    def highlight_related(self, event,master = None):
-        
-        widget = event.widget
-        selected_row = widget.master.row
-        selected_col = widget.master.col
-        
+    def highlight_related(self, event):
+        '''the event is not the actual widget
+        therefore one cannot perform direct manupulation on the widget
+        '''
+        widget : SodokuGridButton = event.widget.master
+        selected_row = widget.row
+        selected_col = widget.col
+        self.reset_highlight()
         # Highlight the row
         for col in range(9):
-            self.entries[selected_row][col].configure(fg_color=Config.hihglight_in_row_col_box)
-        
+            button : ctk.CTkButton = self.entries[selected_row][col]
+            button.configure( border_color=Config.hihglight_in_row_col_box)
+
         # Highlight the column
         for row in range(9):
-            self.entries[row][selected_col].configure(fg_color=Config.hihglight_in_row_col_box)
+            button : ctk.CTkButton = self.entries[row][selected_col]
+            button.configure(border_color =Config.hihglight_in_row_col_box)
         
         # Highlight the 3x3 box
         box_start_row = (selected_row // 3) * 3
         box_start_col = (selected_col // 3) * 3
         for row in range(box_start_row, box_start_row + 3):
             for col in range(box_start_col, box_start_col + 3):
-                self.entries[row][col].configure(fg_color=Config.hihglight_in_row_col_box)
+                self.entries[row][col].configure(border_color=Config.hihglight_in_row_col_box)
         
         # Highlight the selected cell differently
-        widget.configure(fg_color=Config.highlight_selected_color)
+        # and since we cannot perfom direct manupulation on the widget we  refer to it by its row and column
 
-    def reset_highlight(self, event):
+        selected_button = self.entries[selected_row][selected_col]
+        selected_button.configure(fg_color="default")
+        
+
+    def reset_highlight(self ):
         # Reset all cells' background color
         for row in range(9):
             for col in range(9):
-                self.entries[row][col].configure(fg_color="red")
+                self.entries[row][col].configure(fg_color=Config.default_button_color,border_color="#3E454A")
 
     def insert_input2(self,event):
 
@@ -184,13 +193,24 @@ class SudokuGrid(ctk.CTkFrame):
             for col in range(9):
                 text = arr.pop(0)
                 if text == 0: text = ""
+                '''
                 entry = ctk.CTkButton(self, width=40,height= 40,fg_color= Config.default_button_color, text=text,font=('Arial', 18), border_width=1,corner_radius=4)
                 entry.row = row
                 entry.col = col
                 entry.grid(row=row, column=col, padx=(2, 2) if col % 3 != 2 else (2, 6), pady=(2, 2) if row % 3 != 2 else (2, 6))
                 entry.bind("<Button-1>", self.highlight_related)
                 entry.bind("<Button-1>",self.insert_input2)
-                self.entries[row][col] = entry
+                '''
+                highlight_function = self.highlight_related
+                insert_function = self.insert_input2
+                self.entries[row][col] = SodokuGridButton(
+                    self,
+                    text=text,
+                    row=row,
+                    col=col,
+                    higlight_function=highlight_function,
+                    insert_function=insert_function
+                    )
         
         # Create thicker lines for separating 3x3 grids
         for i in range(1,9):
@@ -201,3 +221,15 @@ class SudokuGrid(ctk.CTkFrame):
 
         self.highlight_errors()
 
+
+class SodokuGridButton(ctk.CTkButton):
+    def __init__(self,master,text,row,col,higlight_function,insert_function):
+        super().__init__(master=master,width=40,height= 40,fg_color= Config.default_button_color, text=text,font=('Arial', 18), border_width=1,corner_radius=4)
+        self.row = row
+        self.col = col
+        self.grid(row=row, column=col, padx=(2, 2) if col % 3 != 2 else (2, 6), pady=(2, 2) if row % 3 != 2 else (2, 6))
+        self.bind("<Button-1>", higlight_function)
+        self.bind("<Button-1>",insert_function)
+
+
+        

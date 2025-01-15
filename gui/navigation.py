@@ -4,7 +4,7 @@ from gui.settings_frame import SettingsFrame
 from gui.challanges_frame import ChallangesFrame
 from gui.leaderboard_frame import LeaderBoardFrame
 from gui.welcome_frame  import WelcomeFrame
-from gui.about_us_frame import AboutUsFrame
+from gui.about_us import AboutUs
 from gui.icons import file_path,settings,leaderboard,close,about,challange,play
 from gui.config import Config
 from gui.btn import nav_btn

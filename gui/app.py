@@ -1,14 +1,10 @@
 from typing import Tuple
 
+import customtkinter as ctk
 from gui.navigation import LeftFrame
 from gui.welcome_frame import WelcomeFrame
-from gui.game_play_frame import GamePlayFrame
-import customtkinter as ctk
-from gui.settings_frame import SettingsFrame
-from gui.leaderboard_frame import LeaderBoardFrame
-from gui.challanges_frame import ChallangesFrame
-from gui.game_ending_frame import GameEndingFrame
 from gui.config import Config
+
 ctk.set_appearance_mode(Config.color_mode) 
 
 class APP(ctk.CTk):

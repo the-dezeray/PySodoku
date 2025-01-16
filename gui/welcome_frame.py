@@ -30,17 +30,16 @@ class WelcomeFrame(ctk.CTkFrame):
             self.level_select_frame.pack(anchor ="n",pady=(0,0))
             
             #Goto to the previous selected level button
-            self.previous_level_button = ctk.CTkButton(self.level_select_frame,text="<",width=10,height=10,command=lambda:self.switch_level(1),fg_color ="transparent",text_color="#455263")
-            self.previous_level_button.pack(padx=(5,10),side="left")
+            self.arrow(text = "<",command=lambda:self.switch_level(1))
+        
             self.current_level ="easy"
             #Current Level Label 
             self.current_level_button = ctk.CTkButton(self.level_select_frame,text="easy",fg_color ="transparent",text_color="#455263")
             self.current_level_button.pack(padx=5 ,side="left")
 
             #Goto to the next level Button
-            self.next_level_button = ctk.CTkButton(self.level_select_frame,text=">",width=10,command=lambda:self.switch_level(1),fg_color ="transparent",text_color="#455263")
-            self.next_level_button.pack(padx=(10,5),side="left")
-                  
+            self.arrow(text = ">",command=lambda:self.switch_level(1))
+            
             #Continue saved game
             #$if Config.saved_game_exists():
             self.continue_game_button = ctk.CTkButton(self,text="continue",command= lambda : self.master.render_frame(GamePlayFrame,level = self.current_level,is_existing = True),fg_color ="transparent",text_color="#455263")
@@ -62,4 +61,16 @@ class WelcomeFrame(ctk.CTkFrame):
             self.current_level_button.configure(text =  self.current_level)
             if Config.saved_game_exists():
                   pass
-                  
+      def button(self,text,cmomand):
+             ctk.CTkButton(self,
+                           text="new game",command = lambda : self.master.render_frame(GamePlayFrame,level = self.current_level,is_existing = False),fg_color ="transparent",text_color="#868bab")         
+
+      def arrow(self,text,command):
+            ctk.CTkButton(self.level_select_frame,
+                        text=text,
+                        width=10,
+                        height=10,
+                        command=command,
+                        fg_color ="transparent",
+                        text_color="#455263"
+            ).pack(padx=(10,5),side="left")

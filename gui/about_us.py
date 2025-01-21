@@ -10,7 +10,6 @@ class AboutUs(ctk.CTkFrame):
             super().__init__(
                   master,
                   height=Config.primary_frame_height,
-                  
                   width=Config.primary_frame_width,
                   fg_color= Config.primary_frame_color
                   )

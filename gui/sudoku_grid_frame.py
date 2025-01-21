@@ -13,7 +13,6 @@ class SudokuGrid(ctk.CTkFrame):
             self.level =  kwargs.pop("level")
         if "is_existing" in kwargs:
             self.is_existing =  kwargs.pop("is_existing")
-        
         self.arry = None
         self.solved_array = None
         self.entries = [[None for _ in range(9)] for _ in range(9)]
@@ -21,10 +20,8 @@ class SudokuGrid(ctk.CTkFrame):
         self.stop_event  = threading.Event()
         self.time=""
         self.error_count = 0
-    
         self.create_grid()
     
-
     def fill(self,object:ctk.CTkButton):
         arry = ["1","2","3","4","5","6","7","8","9","backspace"]
         while True:
@@ -46,34 +43,28 @@ class SudokuGrid(ctk.CTkFrame):
         return None
     
     def update_sudoku_button(self,button:ctk.CTkButton,input_value:str):
-        
         if input_value == "backspace":
             input_value = ""
         button.configure(text=input_value)
-        
         cur_row = button.row
         cur_col = button.col
         #if  value is incorrect apply effects on the recent entriie
         if int(input_value) != self.solved_array[cur_row][cur_col]:
 
-            button.configure(fg_color =Config.highlight_error_color)
-            #object.configure(text_color="red")
-
+            button.configure(text_color =Config.highlight_error_color)
+            #object.configure(text_color="red") 
             #highlight duplicates in row
             for i in range(9):
                 _duplicate_entry :ctk.CTkButton = self.entries[cur_row][i]  
 
                 if int(input_value) == _duplicate_entry.cget("text"):  
-                    _duplicate_entry.configure(fg_color = Config.highlight_duplicate)
-            
+                    _duplicate_entry.configure(text_color = Config.highlight_duplicate)
             #highlight duplicates in row
             for i in range(9):
                 _duplicate_entry = self.entries[i][cur_col]
 
                 if int(input_value) ==  _duplicate_entry.cget("text"):
-                    _duplicate_entry.configure(fg_color = Config.highlight_duplicate)
-                    
-
+                    _duplicate_entry.configure(text_color = Config.highlight_duplicate)
             #highlight similar in 3 x 3 box
             box_start_row = (cur_row // 3) * 3
             box_start_col = (cur_col // 3) * 3
@@ -82,7 +73,7 @@ class SudokuGrid(ctk.CTkFrame):
                     _duplicate_entry =  self.entries[i][cur_col]
 
                     if int(input_value) ==  _duplicate_entry.cget("text"):
-                        _duplicate_entry.configure(Config = self.highlight_duplicate)
+                        _duplicate_entry.configure(text_color=Config.highlight_duplicate)
         if self._grid_complete():
             self._game_won_event()
 
@@ -96,7 +87,7 @@ class SudokuGrid(ctk.CTkFrame):
                 a= int(value)
                 b = int(solved)
                 if int(value) !=  int(solved):
-                    self.entries[row][col].configure(fg_color = Config.highlight_duplicate)
+                    self.entries[row][col].configure(border_color = Config.highlight_duplicate)
 
     def _grid_complete(self)->bool:
         for col in range(9):
@@ -106,7 +97,6 @@ class SudokuGrid(ctk.CTkFrame):
                 if x =='':return False
                 if int(x) != y:
                     return False
-                
         return True    
     
     def _game_won_event(self):
@@ -129,26 +119,21 @@ class SudokuGrid(ctk.CTkFrame):
         for col in range(9):
             button : ctk.CTkButton = self.entries[selected_row][col]
             button.configure( border_color=Config.hihglight_in_row_col_box)
-
         # Highlight the column
         for row in range(9):
             button : ctk.CTkButton = self.entries[row][selected_col]
             button.configure(border_color =Config.hihglight_in_row_col_box)
-        
         # Highlight the 3x3 box
         box_start_row = (selected_row // 3) * 3
         box_start_col = (selected_col // 3) * 3
         for row in range(box_start_row, box_start_row + 3):
             for col in range(box_start_col, box_start_col + 3):
                 self.entries[row][col].configure(border_color=Config.hihglight_in_row_col_box)
-        
         # Highlight the selected cell differently
         # and since we cannot perfom direct manupulation on the widget we  refer to it by its row and column
-
         selected_button = self.entries[selected_row][selected_col]
-        selected_button.configure(fg_color="default")
-        
-
+        selected_button.configure(fg_color=Config.hihglight_in_row_col_box)
+    
     def reset_highlight(self ):
         # Reset all cells' background color
         for row in range(9):

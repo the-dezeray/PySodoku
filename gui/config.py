@@ -14,12 +14,11 @@ class Config():
     highlight_similar: str = "yellow"
     highlight_error_color: str = "red"
     highlight_duplicate : str= "red"
-    hihglight_in_row_col_box : str= "yellow"
+    hihglight_in_row_col_box : str= "#8B8000"
     color_mode = "dark" 
     default_chapter_label_font_family = ""
     default_chapter_label_font_size = ""
     default_chapter_label_text_color= "#e5f1f4"
-
     primary_frame_width = 600
     primary_frame_color = "#050707"
     primary_frame_height = 600
@@ -44,14 +43,15 @@ class Config():
         return grid
 
 
-    def saved_game_exists(cls,level):
+    def saved_game_exists(level):
+        '''
         content = get_save_file()
         level = content["saved_games"][level]
-        if level["exists"] == True:
+        if level["exists"]:
             return True
         else :
             return False
-
+        '''
     @classmethod
     def load_from_yaml(cls):
         file_data = get_save_file()

@@ -10,21 +10,17 @@ ctk.set_appearance_mode(Config.color_mode)
 class APP(ctk.CTk):
     def __init__(self):
         super().__init__()
-
         self.navigation : ctk.CTkFrame= LeftFrame(self)
-        self.navigation.pack(side="left",fill ="y",expand =True,)      
-    
+        self.navigation.pack(side="left",fill ="y",expand =True)      
         #The is the a secondary frame when new winwos are made they replace this .. from the settings window , to the leader board or any other replace this frame    
         self.frame : ctk.CTkFrame =WelcomeFrame(self)
         self.frame.pack(side="left",expand= True,fill = "both")
 
-    
     def render_frame(self,frame : ctk.CTkFrame,**kwargs):
         self.frame.destroy()
         self.frame = frame(master = self,**kwargs)
         self.frame.pack(side="left",expand= True,fill = "both")
 
-        
 def start_application():
     app = APP()
     app.mainloop()

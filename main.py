@@ -1,4 +1,8 @@
 from gui.app import start_application
 
 #Start Game
-start_application()
+
+try:
+    start_application()
+except KeyboardInterrupt:
+    print("Game closed : forced exit")

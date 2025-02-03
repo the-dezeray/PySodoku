@@ -1,1 +1,6 @@
 **/__pycache__
+/venv
+/env
+/build
+/dist
+_internal

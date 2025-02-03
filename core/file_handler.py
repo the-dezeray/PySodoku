@@ -39,3 +39,5 @@ def write_to_yaml(content):
     
     with open(file_path, 'w') as file:
         yaml.safe_dump(content, file)
+def create_folder():
+    pass

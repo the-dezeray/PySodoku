@@ -26,7 +26,8 @@ class SettingsFrame(ctk.CTkFrame):
         switch(master=self,text = "Undo moves")
         button_a(master=self,text = "Choose language")
         option_fr(master=self,text = "appearance mode")
-       
+        option_fr(master=self,text = "deafult difficulty")    
+        button_a(master=self,text = "reset all")
         
 def switch(master,text):
     frame = ctk.CTkFrame(master,fg_color= "transparent",width= 400,height = 30)

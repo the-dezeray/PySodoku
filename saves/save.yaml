@@ -9,11 +9,11 @@ config:
   default_button_font_family: arial
   default_button_hover_color: green
   default_button_size: 3
-  default_button_text_color: #e3e6eb
+  default_button_text_color: null
   default_chapter_label_font_family: ''
   default_chapter_label_font_size: ''
   default_chapter_lable_text_color: ''
-  default_text_color: #e3e6eb
+  default_text_color: null
   highlight_duplicate: blue
   highlight_error_color: red
   highlight_selected_color: blue
@@ -26,11 +26,11 @@ saved_games:
     array: 0
     error: 0
     error_count: 0
-    grid: 8493276 12  896 4 63714 89 123  957 9 5671274 76 53   35896   5 92718463
-      64832918
+    grid: 621  45 73 9157 267    6 3  32 9 67  9 67521 527213 48 8 541762276 3 45
+      4 57  389
     hints: true
     level: easy
-    solved_grid: '849327651251896347637145892123489576985671234476253189318964725592718463764532918'
+    solved_grid: '621384597349157826758926134132498675894675213567213948983541762276839451415762389'
     time: ''
   extreme: madness
   hard: null

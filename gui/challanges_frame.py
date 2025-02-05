@@ -1,7 +1,6 @@
 import customtkinter as ctk
 from gui.config import Config
 
-
 class ChallangesFrame(ctk.CTkFrame):
     def __init__(self,master):
 

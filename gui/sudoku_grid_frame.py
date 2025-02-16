@@ -1,45 +1,71 @@
 import threading
-import keyboard
 import customtkinter as ctk
-
-from core.sodoku import generate,solved_sodoku
+import time
+from pynput.keyboard import Listener
+from core.sodoku import generate, solved_sodoku
 from gui.config import Config
 
 class SudokuGrid(ctk.CTkFrame):
 
-    def __init__(self,parent,**kwargs):
-        super().__init__(master=parent,fg_color="#050707")
+    def __init__(self, parent, **kwargs):
+        super().__init__(master=parent, fg_color="#050707")
         if "level" in kwargs:
-            self.level =  kwargs.pop("level")
+            self.level = kwargs.pop("level")
         if "is_existing" in kwargs:
-            self.is_existing =  kwargs.pop("is_existing")
+            self.is_existing = kwargs.pop("is_existing")
         self.arry = None
         self.solved_array = None
         self.entries = [[None for _ in range(9)] for _ in range(9)]
         self.thread = []
-        self.stop_event  = threading.Event()
-        self.time=""
+        self.stop_event = threading.Event()
+        self.time = ""
         self.error_count = 0
+        self.key = None  # To store the key pressed
         self.create_grid()
-    
-    def fill(self,object:ctk.CTkButton):
-        arry = ["1","2","3","4","5","6","7","8","9","backspace"]
+
+        # Start the listener in a separate thread
+        self.listener_thread = threading.Thread(target=self.start_listener)
+        self.listener_thread.start()
+
+    def start_listener(self):
+        def on_press(key):
+           
+            self.key = str(key.char)  # Store the character of the key pressed
+    # For special keys like backspace
+            return True  # Keep listening
+
+        with Listener(on_press=on_press) as listener:
+            listener.join()  # Block the listener in the separate thread
+
+    def fill(self, object: ctk.CTkButton):
+        from pynput import keyboard
+        arry = ["1", "2", "3", "4", "5", "6", "7", "8", "9", keyboard.Key.backspace ]
+        
         while True:
-            key = keyboard.read_key()
-            if str(key) in arry:
-                if len(self.thread) > 1 and object.cget("text") in arry:
-                    self.thread.pop(0)
-                    return 0
-                else:
-                    self.update_sudoku_button(object,key)
-                    #capture current game to yaml save file 
-                    Config.capture_game( 
-                        grid = self.grid_screenshot(),
-                        level= self.level,
-                        error_count = self.error_count,
-                        time= self.time,
-                        solved_grid = self.solved_array
-                        )             
+            if self.key:  # Check if a key has been pressed
+                print(f"key type {self.key}")
+                
+                if self.key in arry:
+                    if len(self.thread) > 1 and object.cget("text") in arry:
+                        self.thread.pop(0)
+                        return 0
+                    else:
+                        self.update_sudoku_button(object, self.key)
+                        
+                        # Capture current game to YAML save file
+                        Config.capture_game(
+                            grid=self.grid_screenshot(),
+                            level=self.level,
+                            error_count=self.error_count,
+                            time=self.time,
+                            solved_grid=self.solved_array
+                        )
+                        
+                    self.key = None  # Reset after handling the key press
+            else:
+                # If no key has been pressed, you can add a small delay to avoid busy-waiting
+                time.sleep(0.1)
+                
         return None
     
     def update_sudoku_button(self,button:ctk.CTkButton,input_value:str):

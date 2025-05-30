@@ -4,4 +4,4 @@ customtkinter
 keyboard
 PyYaml
 numpy
-cx_Freeze
+

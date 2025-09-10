@@ -1,0 +1,15 @@
+[project]
+name = "pysodoku"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "customtkinter>=5.2.2",
+    "dokusan>=0.1.0",
+    "keyboard>=0.13.5",
+    "numpy>=2.3.2",
+    "pillow>=11.3.0",
+    "pynput>=1.8.1",
+    "pyyaml>=6.0.2",
+]
